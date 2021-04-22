@@ -40,22 +40,22 @@ func Trimmer(hash string, headntail ...int) string {
 	switch len(headntail) {
 	case 0:
 		if len(hash) < 13 {
-			return "string too short to be trimmed"
+			return hash
 		}
 		head = hash[:6]
 		tail = hash[len(hash)-6:]
 	case 1:
 		if len(hash) <= headntail[0] {
-			return "string too short to be trimmed"
+			return hash
 		}
 		head = hash[:headntail[0]]
 		tail = ""
 	case 2:
 		if len(hash) <= headntail[0]+headntail[1] {
-			return "string too short to be trimmed"
+			return hash
 		}
 		head = hash[:headntail[0]]
-		tail = ""
+		tail = hash[headntail[1]:]
 	default:
 		return "too many arguments"
 	}
