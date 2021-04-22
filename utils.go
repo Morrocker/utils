@@ -55,7 +55,7 @@ func Trimmer(hash string, headntail ...int) string {
 			return hash
 		}
 		head = hash[:headntail[0]]
-		tail = hash[headntail[1]:]
+		tail = hash[len(hash)-headntail[1]:]
 	default:
 		return "too many arguments"
 	}
