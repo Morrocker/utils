@@ -35,11 +35,32 @@ func RandString(n int) string {
 }
 
 // Trimmer asfda
-func Trimmer(hash string) string {
-	head := hash[:6]
-	tail := hash[len(hash)-6:]
-	ret := head + "..." + tail
-	return ret
+func Trimmer(hash string, headntail ...int) string {
+	var head, tail string
+	switch len(headntail) {
+	case 0:
+		if len(hash) < 13 {
+			return "string too short to be trimmed"
+		}
+		head = hash[:6]
+		tail = hash[len(hash)-6:]
+	case 1:
+		if len(hash) <= headntail[0] {
+			return "string too short to be trimmed"
+		}
+		head = hash[:headntail[0]]
+		tail = ""
+	case 2:
+		if len(hash) <= headntail[0]+headntail[1] {
+			return "string too short to be trimmed"
+		}
+		head = hash[:headntail[0]]
+		tail = ""
+	default:
+		return "too many arguments"
+	}
+
+	return fmt.Sprintf("%s...%s", head, tail)
 }
 
 func B2H(n int64) string {
